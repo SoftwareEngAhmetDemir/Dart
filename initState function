@@ -1,0 +1,79 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+void main() {
+  runApp(MyApp2());
+}
+
+
+ 
+
+class MyApp2 extends StatefulWidget {
+  final String s="ahmed";
+  
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState2();
+  }
+}
+
+class MyApp extends StatelessWidget{
+ String s;
+ String surename;
+  
+  
+  MyApp(this.s,this.surename);
+    @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+
+body: Column
+(
+children:  <Widget>[
+
+
+],
+
+ 
+),
+      ),
+
+    );
+  }
+  
+}
+
+class _MyAppState2 extends State<MyApp2>{
+  int counter =0;
+  String sc;
+ 
+
+  @override
+  void initState() {
+    this.sc = 'widget.s';
+
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+   return MaterialApp(
+home: Scaffold(
+  appBar: AppBar(
+    title: Text('App Barggg')
+  ),
+
+body: Column(
+  children: <Widget>[
+   Text(this.sc),
+
+  ],
+),
+
+),
+   );
+  }
+  
+
+}
