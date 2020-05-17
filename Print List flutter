@@ -1,0 +1,8 @@
+List<String> myList = ['Ahmed' , 'Deep'];
+
+
+Container(
+        child: Column(
+            children: myList.map((e) => new Text(e)).toList(),
+          ),
+   );
