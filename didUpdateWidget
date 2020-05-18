@@ -1,0 +1,107 @@
+// this function (didUpdateWidget) is used when stateless class call statefulWidget class constructor 
+
+// And this function called when i do navigate between application's pages and come again to this page whcich has the didUpdateWidget Or
+//when i press into thunder button whcich make update you Can seen in line 25
+
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+
+void main() {
+  runApp(MyAppS());
+}
+
+
+ class MyAppS extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar:AppBar(
+          title:Text('My Text'),
+        ),
+        body: MyApp2(),
+      ),
+    );
+  }
+ 
+   
+ }
+
+
+class MyApp2 extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MyApp();
+  }
+  
+  
+ 
+}
+
+class MyApp extends State<MyApp2>{
+
+  @override
+  void didUpdateWidget(MyApp2 oldWidget) {
+  
+    super.didUpdateWidget(oldWidget);
+     print('updated data');
+  }
+  @override
+  Widget build(BuildContext context) {
+   return MaterialApp(
+     home: Scaffold(
+      
+  body: Column(
+    children:<Widget>[
+
+    ],
+  ),
+
+     ),
+
+   );
+  }
+  
+}
+
+class _MyAppState2 extends State<MyApp2>{
+
+ @override
+  void didUpdateWidget(MyApp2 oldWidget) {
+  
+    super.didUpdateWidget(oldWidget);
+    print('updated');
+  }
+  @override
+  Widget build(BuildContext context) {
+   return MaterialApp(
+home: Scaffold(
+  appBar: AppBar(
+    title: Text('App Barggg')
+  ),
+
+),
+
+
+   );
+  }
+  
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
