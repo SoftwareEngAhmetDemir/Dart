@@ -1,0 +1,79 @@
+import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+void main() {
+  runApp(MyApp2());
+}
+class Teachers
+{
+  String name;
+  String Ders;
+  String password;
+Teachers(this.name, this.Ders,this.password);
+}
+
+class MyApp2 extends StatefulWidget
+{
+  @override
+  State<StatefulWidget> createState() {
+    return MyApp();
+  }
+  
+}
+
+class MyApp extends State<MyApp2> {
+List<Teachers> L = [];
+
+  // This widget is the root of your application.
+  @override
+  void initState() {
+     
+    print('-------------------------------------------------\n');
+    // TODO: implement initState
+   L.clear();
+DatabaseReference ref = FirebaseDatabase.instance.reference().child('Teachers');
+
+   ref.once().then((DataSnapshot snap) {
+var Keys = snap.value.keys;
+var data = snap.value;
+
+
+  for(var k in Keys){
+ Teachers t= new Teachers
+  (data[k]['name'], 
+ data[k] ['Ders'], data[k]['password']);
+ setState(() {
+   L.add(t);
+ });
+
+  }
+ });
+//  super.initState(); 
+  }
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+     home: Scaffold(
+       appBar: AppBar(
+         title: Text('BARRRRR'),
+       ),
+       body: Column(
+         children: <Widget>[
+    
+        for(int i=0;i<L.length;i++) 
+  Text(L[i].name)        ,
+  
+   
+         ]
+   )
+   
+ 
+
+            
+          //  Text('ahmed'),
+         
+       ),
+     
+    
+    );
+  }
+}
