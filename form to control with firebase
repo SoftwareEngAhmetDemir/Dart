@@ -1,0 +1,150 @@
+import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+void main() {
+  runApp(MyApp2());
+}
+class Ogrenciler
+{
+  String id;
+  String pass;
+  
+Ogrenciler(this.pass,this.id);
+}
+
+class MyApp2 extends StatefulWidget
+{
+  @override
+  State<StatefulWidget> createState() {
+    return MyApp();
+  }
+  
+}
+
+class MyApp extends State<MyApp2> {
+List<Ogrenciler> L = [];
+String textnumber='';
+String password='';
+  // This widget is the root of your application.
+  @override
+  void initState() {
+     super.initState(); 
+    print('-------------------------------------------------\n');
+    // TODO: implement initState
+   L.clear();
+DatabaseReference ref = FirebaseDatabase.instance.reference().child('Ogrenciler');
+
+   ref.once().then((DataSnapshot snap)  {
+var Keys = snap.value.keys;
+var data = snap.value;
+
+
+  for(var k in Keys){
+ Ogrenciler t= new Ogrenciler(data[k]['pass'],k);
+ setState(() {
+  L.add(t);
+  });
+
+  }
+ });
+  
+  }
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+     home: Scaffold(
+       appBar: AppBar(
+         title: Text('Login Öğrenci'),
+       ),
+       body: Column(
+         children: <Widget>[
+    SizedBox(height: 50.0),
+    Container(
+
+   width: 350,
+   margin: EdgeInsets.only(left:20,right: 30),
+   
+ child:TextField(
+  obscureText: false,
+  keyboardType: TextInputType.number,
+  onChanged: (value) {
+    setState(() {
+      this.textnumber = value;
+    });
+  },
+  
+  decoration: InputDecoration(
+    border: OutlineInputBorder(),
+    labelText: 'Öğrenci Numarası',
+    
+     
+  ),
+),
+ ),
+//  Text(L[1].pass+' '+L[2].id),
+ 
+SizedBox(height: 50.0),
+// Text(textnumber),
+// Text(password),
+//SizedBox(height:50.0,),
+Container(
+  width: 350,
+  margin: EdgeInsets.only(left:20,right: 30),
+child:TextField(
+  obscureText: true,
+  onChanged: (value) {
+    setState(() {
+      this.password = value;
+    });
+  },
+  decoration: InputDecoration(
+    border: OutlineInputBorder(),
+    labelText: 'Password',
+    
+  ),
+)
+  ),
+   SizedBox(height: 30,),
+    
+    Container(
+
+   height: 50,
+    child:FlatButton(
+            onPressed: () {
+          for(Ogrenciler i in L)
+          {
+           if(i.id == this.textnumber&&i.pass==this.password)
+           {
+             print('true');
+             break;
+           }
+           else
+           {
+             print('false');
+           }
+          }
+            },
+            textColor: Colors.white,
+            // padding: const EdgeInsets.all(0.0),
+            child: Container(
+             
+              padding: const EdgeInsets.all(10.0),
+              child:
+                  const Text('Login', style: TextStyle(fontSize: 20)),
+            ),
+    color: Colors.blue,),
+     ),
+         ]
+   )
+   
+ 
+
+            
+          //  Text('ahmed'),
+         
+       ),
+     
+    
+    );
+  }
+}
